@@ -20,6 +20,11 @@ const options = [
   {
     target: '**/.umi/**',
     replace: 'umi'
+  },
+  {
+    target: 'umi',
+    replace: '@utils/router',
+    modules: ['Link', 'useHistory']
   }
 ];
 ruleTester.run('no-internal-modules', rule, {
@@ -51,15 +56,9 @@ ruleTester.run('no-internal-modules', rule, {
     {
       code: "import { Link, useModel } from 'umi';",
       errors: [{ messageId: 'noInternalModules' }],
-      options: [
-        {
-          target: 'umi',
-          replace: '@utils/router',
-          modules: ['Link', 'useHistory']
-        }
-      ],
+      options,
       output: "import {  useModel } from 'umi';\nimport { Link } from '@utils/router';"
-    },
+    }
     // {
     //   code: "import { Link, useModel, useHistory } from 'umi';",
     //   errors: [{ messageId: 'noInternalModules' }, { messageId: 'noInternalModules' }],
