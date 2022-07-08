@@ -37,31 +37,31 @@ ruleTester.run('no-internal-modules', rule, {
   invalid: [
     {
       code: "import { useRequest } from '@/.umi/request-plugin/request';",
-      errors: [{ message: "replace the path '@/.umi/request-plugin/request' with 'umi' please" }],
+      errors: [{ messageId: 'replace-path', data: { target: '@/.umi/request-plugin/request', replace: 'umi' } }],
       options,
       output: "import { useRequest } from 'umi';"
     },
     {
       code: "import { useModel } from '@/.umi/model-plugin/model';",
-      errors: [{ message: "replace the path '@/.umi/model-plugin/model' with 'umi' please" }],
+      errors: [{ messageId: 'replace-path', data: { target: '@/.umi/model-plugin/model', replace: 'umi' } }],
       options,
       output: "import { useModel } from 'umi';"
     },
     {
       code: "import { useRequest } from 'src/.umi/request-plugin/request';",
-      errors: [{ message: "replace the path 'src/.umi/request-plugin/request' with 'umi' please" }],
+      errors: [{ messageId: 'replace-path', data: { target: 'src/.umi/request-plugin/request', replace: 'umi' } }],
       options,
       output: "import { useRequest } from 'umi';"
     },
     {
       code: "import { Link, useModel } from 'umi';",
-      errors: [{ message: "import the module 'Link' from '@/utils/router' please" }],
+      errors: [{ messageId: 'replace-module', data: { name: 'Link', replace: '@/utils/router' } }],
       options,
       output: "import {  useModel } from 'umi';\nimport { Link } from '@/utils/router';"
     },
     {
       code: "import { Link as LinkTo, useModel } from 'umi';",
-      errors: [{ message: "import the module 'Link as LinkTo' from '@/utils/router' please" }],
+      errors: [{ messageId: 'replace-module', data: { name: 'Link as LinkTo', replace: '@/utils/router' } }],
       options,
       output: "import {  useModel } from 'umi';\nimport { Link as LinkTo } from '@/utils/router';"
     }
