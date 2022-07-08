@@ -58,6 +58,12 @@ ruleTester.run('no-internal-modules', rule, {
       errors: [{ messageId: 'noInternalModules' }],
       options,
       output: "import {  useModel } from 'umi';\nimport { Link } from '@utils/router';"
+    },
+    {
+      code: "import { Link as LinkTo, useModel } from 'umi';",
+      errors: [{ messageId: 'noInternalModules' }],
+      options,
+      output: "import {  useModel } from 'umi';\nimport { Link as LinkTo } from '@utils/router';"
     }
     // {
     //   code: "import { Link, useModel, useHistory } from 'umi';",
