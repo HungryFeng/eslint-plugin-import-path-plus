@@ -21,7 +21,7 @@ ruleTester.run('no-empty-module', rule, {
     "import { useRequest } from 'umi';",
     "import umi from 'umi';",
     "import * as umi from 'umi';",
-    "import './index.less'"
+    "import './index.less';"
   ],
 
   invalid: [
