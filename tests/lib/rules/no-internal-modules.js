@@ -23,7 +23,7 @@ const options = [
   },
   {
     target: 'umi',
-    replace: '@utils/router',
+    replace: '@/utils/router',
     modules: ['Link', 'useHistory']
   }
 ];
@@ -37,58 +37,33 @@ ruleTester.run('no-internal-modules', rule, {
   invalid: [
     {
       code: "import { useRequest } from '@/.umi/request-plugin/request';",
-      errors: [{ messageId: 'noInternalModules' }],
+      errors: [{ message: "replace the path '@/.umi/request-plugin/request' with 'umi' please" }],
       options,
       output: "import { useRequest } from 'umi';"
     },
     {
       code: "import { useModel } from '@/.umi/model-plugin/model';",
-      errors: [{ messageId: 'noInternalModules' }],
+      errors: [{ message: "replace the path '@/.umi/model-plugin/model' with 'umi' please" }],
       options,
       output: "import { useModel } from 'umi';"
     },
     {
       code: "import { useRequest } from 'src/.umi/request-plugin/request';",
-      errors: [{ messageId: 'noInternalModules' }],
+      errors: [{ message: "replace the path 'src/.umi/request-plugin/request' with 'umi' please" }],
       options,
       output: "import { useRequest } from 'umi';"
     },
     {
       code: "import { Link, useModel } from 'umi';",
-      errors: [{ messageId: 'noInternalModules' }],
+      errors: [{ message: "import the module 'Link' from '@/utils/router' please" }],
       options,
-      output: "import {  useModel } from 'umi';\nimport { Link } from '@utils/router';"
+      output: "import {  useModel } from 'umi';\nimport { Link } from '@/utils/router';"
     },
     {
       code: "import { Link as LinkTo, useModel } from 'umi';",
-      errors: [{ messageId: 'noInternalModules' }],
+      errors: [{ message: "import the module 'Link as LinkTo' from '@/utils/router' please" }],
       options,
-      output: "import {  useModel } from 'umi';\nimport { Link as LinkTo } from '@utils/router';"
+      output: "import {  useModel } from 'umi';\nimport { Link as LinkTo } from '@/utils/router';"
     }
-    // {
-    //   code: "import { Link, useModel, useHistory } from 'umi';",
-    //   errors: [{ messageId: 'noInternalModules' }, { messageId: 'noInternalModules' }],
-    //   options: [
-    //     {
-    //       target: 'umi',
-    //       replace: '@utils/router',
-    //       modules: ['Link', 'useHistory']
-    //     }
-    //   ],
-    //   output:
-    //     "import {  useModel,  } from 'umi';\nimport { Link } from '@utils/router';\nimport { useHistory } from '@utils/router';"
-    // }
-    // {
-    //   code: "import { useModel, Link, useHistory } from 'umi';",
-    //   errors: [{ messageId: 'noInternalModules' }, { messageId: 'noInternalModules' }],
-    //   options: [
-    //     {
-    //       target: 'umi',
-    //       replace: '@utils/router',
-    //       modules: ['Link', 'useHistory']
-    //     }
-    //   ],
-    //   output: "import { useModel } from 'umi';\nimport { Link, useHistory } from '@utils/router';"
-    // }
   ]
 });
