@@ -17,7 +17,12 @@ const rule = require('../../../lib/rules/no-empty-module'),
 
 const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2020, sourceType: 'module' } });
 ruleTester.run('no-empty-module', rule, {
-  valid: ["import { useRequest } from 'umi';", "import umi from 'umi';", "import * as umi from 'umi';"],
+  valid: [
+    "import { useRequest } from 'umi';",
+    "import umi from 'umi';",
+    "import * as umi from 'umi';",
+    "import './index.less'"
+  ],
 
   invalid: [
     {
