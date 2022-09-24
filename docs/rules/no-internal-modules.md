@@ -1,35 +1,55 @@
 # no internal modules (no-internal-modules)
 
-Please describe the origin of the rule here.
+本条规则用于统一某个模块的导入路径
 
 ## Rule Details
 
-This rule aims to...
+- `target` 需要禁用的路径
+- `replace` 替换后的路径
+- `modules` 需要替换的模块
 
-Examples of **incorrect** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-Examples of **correct** code for this rule:
+使用以下规则：
 
 ```js
-
-// fill me in
-
+{
+  ...
+  'rules': {
+    'import-path-plus/no-internal-modules': [
+      'error',
+      {
+        target: '**/.umi/**',
+        replace: 'umi'
+      },
+      {
+        target: 'umi',
+        replace: '@/utils/router',
+        modules: ['Link', 'useHistory']
+      }
+    ]
+  }
+}
 ```
 
-### Options
+原代码：
+```js
+import { useRequest } from '@/.umi/request-plugin/request';
+```
 
-If there are any options, describe them here. Otherwise, delete this section.
+替换后为：
 
-## When Not To Use It
+```js
+import { useRequest } from 'umi';
+```
 
-Give a short description of when it would be appropriate to turn off this rule.
+原代码：
+```js
+import { Link, useModel } from 'umi';
+```
 
-## Further Reading
+替换后为：
 
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+```js
+import {  useModel } from 'umi';
+import { Link } from '@/utils/router';
+```
+
