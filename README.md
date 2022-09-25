@@ -22,25 +22,31 @@ Add `import-path-plus` to the plugins section of your `.eslintrc` configuration 
 
 ```json
 {
-    "plugins": [
-        "import-path-plus"
-    ]
+  "plugins": ["import-path-plus"]
 }
 ```
 
-
 Then configure the rules you want to use under the rules section.
 
-```json
+```javascript
 {
     "rules": {
-        "import-path-plus/rule-name": 2
+        "import-path-plus/no-internal-modules": [
+            "error",
+            {
+                target: "**/.umi/**",
+                replace: "umi"
+            },
+            {
+                target: "umi",
+                replace: "@/utils/router",
+                modules: ["Link", "useHistory"]
+            }
+        ]
     }
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
-
-
+- no-internal-modules
